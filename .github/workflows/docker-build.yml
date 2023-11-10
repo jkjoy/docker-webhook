@@ -43,7 +43,7 @@ jobs:
         id: docker_meta
         uses: docker/metadata-action@v4
         with:
-          images: thecatlady/webhook,ghcr.io/thecatlady/webhook
+          images: jkjoy/webhook,ghcr.io/jkjoy/webhook
           flavor: |
             latest=true
           tags: |
