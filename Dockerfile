@@ -7,7 +7,7 @@ RUN         curl -#L -o webhook.tar.gz https://api.github.com/repos/adnanh/webho
             go get -d && \
             go build -ldflags="-s -w" -o /usr/local/bin/webhook
 
-FROM        ubuntu:23.10
+FROM        ubuntu:24.10
 RUN         apt update && apt upgrade -y && apt install curl jq tini tzdata lynx -y
 COPY        --from=BUILD_IMAGE /usr/local/bin/webhook /usr/local/bin/webhook
 WORKDIR     /config
