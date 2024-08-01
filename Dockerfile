@@ -1,4 +1,4 @@
-FROM        golang:bullseye AS BUILD_IMAGE
+FROM        golang:1.20.1-alpine3.17 AS BUILD_IMAGE
 RUN         apt update && apt upgrade -y  && apt install -y curl && apt install -y gcc && apt install -y libc-dev && apt install build-essential -y
 WORKDIR     /go/src/github.com/adnanh/webhook
 COPY        webhook.version .
