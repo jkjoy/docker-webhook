@@ -1,5 +1,5 @@
 # Build stage (using golang image)
-FROM golang:1.20.1-alpine3.17 as build_image
+FROM --platform=linux/amd64 golang:1.20.1-alpine3.17 as build_image
 
 # Install necessary packages
 RUN apk update && apk add --no-cache curl gcc libc-dev build-base
@@ -14,7 +14,7 @@ RUN curl -#L -o webhook.tar.gz https://api.github.com/repos/adnanh/webhook/tarba
     go build -ldflags="-s -w" -o /usr/local/bin/webhook
 
 # Final stage (using ubuntu image)
-FROM ubuntu:22.04
+FROM --platform=linux/amd64 ubuntu:22.04
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     curl jq tini tzdata lynx && \
     rm -rf /var/lib/apt/lists/*
