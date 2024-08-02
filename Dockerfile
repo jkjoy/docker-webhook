@@ -15,8 +15,13 @@ RUN curl -#L -o webhook.tar.gz https://api.github.com/repos/adnanh/webhook/tarba
 
 # Final stage (using ubuntu image)
 FROM --platform=linux/amd64 ubuntu:22.04
-RUN apt-get update && apt-get upgrade -y && apt-get install -y \
-    curl jq tini tzdata lynx && \
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y curl && \
+    apt-get install -y jq && \
+    apt-get install -y tini && \
+    apt-get install -y tzdata && \
+    apt-get install -y lynx && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy the built application from build stage
