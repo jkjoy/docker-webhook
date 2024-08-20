@@ -1,4 +1,5 @@
-FROM   golang:latest AS BUILD_IMAGE
+ARG TARGETPLATFORM
+FROM    --platform=$TARGETPLATFORM golang:latest AS build_image
 RUN         apt update && apt upgrade -y  && apt install -y curl && apt install -y gcc && apt install -y libc-dev && apt install build-essential -y
 
 WORKDIR /go/src/github.com/adnanh/webhook
