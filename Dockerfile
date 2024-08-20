@@ -12,7 +12,7 @@ RUN curl -#L -o webhook.tar.gz https://api.github.com/repos/adnanh/webhook/tarba
     tar -xzf webhook.tar.gz --strip 1 && \
     go get -d && \
     go build -ldflags="-s -w" -o /usr/local/bin/webhook
-
+RUN ls -l /usr/local/bin/webhook
 # Final stage (using ubuntu image)
 FROM --platform=linux/amd64 ubuntu:22.04
 RUN apt-get update && \
@@ -26,7 +26,7 @@ RUN apt-get update && \
 
 # Copy the built application from build stage
 COPY --from=build_image /usr/local/bin/webhook /usr/local/bin/webhook
-
+RUN ls -l /usr/local/bin/webhook
 # Set the working directory
 WORKDIR /config
 
