@@ -1,4 +1,4 @@
-FROM  golang:1.23.0 AS build_image
+FROM  golang:1.20.1-alpine3.17 AS build_image
 RUN  apt update && apt upgrade -y  && apt install -y curl && apt install -y gcc && apt install -y libc-dev && apt install build-essential -y
 
 WORKDIR /go/src/github.com/adnanh/webhook
