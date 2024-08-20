@@ -1,4 +1,4 @@
-FROM  --platform linux/amd64 golang:latest AS build_image
+FROM  golang:latest AS build_image
 RUN  apt update && apt upgrade -y  && apt install -y curl && apt install -y gcc && apt install -y libc-dev && apt install build-essential -y
 
 WORKDIR /go/src/github.com/adnanh/webhook
@@ -11,7 +11,7 @@ RUN curl -#L -o webhook.tar.gz https://api.github.com/repos/adnanh/webhook/tarba
     go build -ldflags="-s -w" -o /usr/local/bin/webhook
 RUN ls -l /usr/local/bin/webhook
 # Final stage (using ubuntu image)
-FROM --platform=linux/amd64 ubuntu:22.04
+FROM ubuntu:latest
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y curl && \
