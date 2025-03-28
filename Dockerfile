@@ -11,17 +11,15 @@ RUN curl -#L -o webhook.tar.gz https://api.github.com/repos/adnanh/webhook/tarba
     go build -ldflags="-s -w" -o /usr/local/bin/webhook
 RUN ls -l /usr/local/bin/webhook
 # Final stage (using ubuntu image)
-FROM ubuntu:24.10
+FROM alpine:latest
 
 
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y curl && \
-    apt-get install -y jq && \
-    apt-get install -y tini && \
-    apt-get install -y tzdata && \
-    apt-get install -y lynx && \
-    rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache \
+    jq \
+    tini \
+    tzdata \
+    lynx \
+    curl 
 
 # Copy the built application from build stage
 COPY --from=build_image /usr/local/bin/webhook /usr/local/bin/webhook
